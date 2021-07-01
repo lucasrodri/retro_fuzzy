@@ -54,7 +54,7 @@ RULEBLOCK No1
 	ACCU : MAX;			// Use 'max' accumulation method
 
 	RULE 1 : IF index IS i1 AND gordura IS p1 THEN qot IS razoavel;
-	RULE 2 : IF index IS i2 AND gordura IS p1 THEN qot IS pessimo;
+	RULE 2 : IF index IS i2 AND gordura IS p1 THEN qot IS razoavel;
 	RULE 3 : IF index IS i3 AND gordura IS p1 THEN qot IS pessimo;
 	RULE 4 : IF index IS i4 AND gordura IS p1 THEN qot IS pessimo;
 	RULE 5 : IF index IS i5 AND gordura IS p1 THEN qot IS razoavel;
@@ -64,7 +64,7 @@ RULEBLOCK No1
 	RULE 9 : IF index IS i4 AND gordura IS p2 THEN qot IS razoavel;
 	RULE 10 : IF index IS i5 AND gordura IS p2 THEN qot IS pessimo;
 	RULE 11 : IF index IS i1 AND gordura IS p3 THEN qot IS excelente;
-	RULE 12 : IF index IS i2 AND gordura IS p3 THEN qot IS excelente;
+	RULE 12 : IF index IS i2 AND gordura IS p3 THEN qot IS razoavel;
 	RULE 13 : IF index IS i3 AND gordura IS p3 THEN qot IS pessimo;
 	RULE 14 : IF index IS i4 AND gordura IS p3 THEN qot IS pessimo;
 	RULE 15 : IF index IS i5 AND gordura IS p3 THEN qot IS razoavel;

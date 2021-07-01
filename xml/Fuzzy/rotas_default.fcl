@@ -53,31 +53,31 @@ RULEBLOCK No1
 	ACT : MIN;			// Use 'min' activation method
 	ACCU : MAX;			// Use 'max' accumulation method
 
-        RULE 1 : IF index IS i1 AND gordura IS p1 THEN qot IS excelente;
-        RULE 2 : IF index IS i2 AND gordura IS p1 THEN qot IS excelente;
-        RULE 3 : IF index IS i3 AND gordura IS p1 THEN qot IS excelente;
-        RULE 4 : IF index IS i4 AND gordura IS p1 THEN qot IS excelente;
-        RULE 5 : IF index IS i5 AND gordura IS p1 THEN qot IS excelente;
+        RULE 1 : IF index IS i1 AND gordura IS p1 THEN qot IS razoavel;
+        RULE 2 : IF index IS i2 AND gordura IS p1 THEN qot IS razoavel;
+        RULE 3 : IF index IS i3 AND gordura IS p1 THEN qot IS razoavel;
+        RULE 4 : IF index IS i4 AND gordura IS p1 THEN qot IS pessimo;
+        RULE 5 : IF index IS i5 AND gordura IS p1 THEN qot IS razoavel;
         RULE 6 : IF index IS i1 AND gordura IS p2 THEN qot IS excelente;
         RULE 7 : IF index IS i2 AND gordura IS p2 THEN qot IS excelente;
         RULE 8 : IF index IS i3 AND gordura IS p2 THEN qot IS excelente;
         RULE 9 : IF index IS i4 AND gordura IS p2 THEN qot IS excelente;
-        RULE 10 : IF index IS i5 AND gordura IS p2 THEN qot IS excelente;
+        RULE 10 : IF index IS i5 AND gordura IS p2 THEN qot IS pessimo;
         RULE 11 : IF index IS i1 AND gordura IS p3 THEN qot IS excelente;
         RULE 12 : IF index IS i2 AND gordura IS p3 THEN qot IS excelente;
-        RULE 13 : IF index IS i3 AND gordura IS p3 THEN qot IS excelente;
-        RULE 14 : IF index IS i4 AND gordura IS p3 THEN qot IS excelente;
-        RULE 15 : IF index IS i5 AND gordura IS p3 THEN qot IS excelente;
-        RULE 16 : IF index IS i1 AND gordura IS p4 THEN qot IS excelente;
-        RULE 17 : IF index IS i2 AND gordura IS p4 THEN qot IS excelente;
-        RULE 18 : IF index IS i3 AND gordura IS p4 THEN qot IS excelente;       
-        RULE 19 : IF index IS i4 AND gordura IS p4 THEN qot IS excelente;
-        RULE 20 : IF index IS i5 AND gordura IS p4 THEN qot IS excelente;
-        RULE 21 : IF index IS i1 AND gordura IS p5 THEN qot IS excelente;
-        RULE 22 : IF index IS i2 AND gordura IS p5 THEN qot IS excelente;
-        RULE 23 : IF index IS i3 AND gordura IS p5 THEN qot IS excelente;
-        RULE 24 : IF index IS i4 AND gordura IS p5 THEN qot IS excelente;
-        RULE 25 : IF index IS i5 AND gordura IS p5 THEN qot IS excelente;
+        RULE 13 : IF index IS i3 AND gordura IS p3 THEN qot IS razoavel;
+        RULE 14 : IF index IS i4 AND gordura IS p3 THEN qot IS pessimo;
+        RULE 15 : IF index IS i5 AND gordura IS p3 THEN qot IS razoavel;
+        RULE 16 : IF index IS i1 AND gordura IS p4 THEN qot IS razoavel;
+        RULE 17 : IF index IS i2 AND gordura IS p4 THEN qot IS razoavel;
+        RULE 18 : IF index IS i3 AND gordura IS p4 THEN qot IS pessimo;       
+        RULE 19 : IF index IS i4 AND gordura IS p4 THEN qot IS pessimo;
+        RULE 20 : IF index IS i5 AND gordura IS p4 THEN qot IS pessimo;
+        RULE 21 : IF index IS i1 AND gordura IS p5 THEN qot IS pessimo;
+        RULE 22 : IF index IS i2 AND gordura IS p5 THEN qot IS pessimo;
+        RULE 23 : IF index IS i3 AND gordura IS p5 THEN qot IS pessimo;
+        RULE 24 : IF index IS i4 AND gordura IS p5 THEN qot IS pessimo;
+        RULE 25 : IF index IS i5 AND gordura IS p5 THEN qot IS pessimo;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK

@@ -76,6 +76,8 @@ public class RetroFuzzy {
         for (int i = 0; i < index.length; i++) {
             qot[i] = getBestQoTResult(i, index, gordura, qot, best);
         }
+        //Gravar no final pra garantir a ultima atualizacao do valor
+        writeRules(index, gordura, qot);
         printRules(index, gordura, qot);
     }
 
@@ -138,8 +140,6 @@ public class RetroFuzzy {
                 }
             }
         }
-        //Gravar no final pra garantir a ultima atualizacao do valor
-        writeRules(index, gordura, qot);
         
         System.out.println("Terminando a Regra: " + times++ + " Valor: \"" + result + "\" Valor da Metrica(" + metric + "): " + bestValue);
 
@@ -158,10 +158,14 @@ public class RetroFuzzy {
 
         int countRule = 1;
 
+        System.out.println("\n");
+        
         for (int c = 0; c < index.length; c++) {
-            System.out.println("\n\nRULE " + countRule++ + " : IF index IS " + index[c] + " AND gordura IS "
-                    + gordura[c] + " THEN qot IS " + qot[c] + ";\n\n");
+            System.out.println("RULE " + countRule++ + " : IF index IS " + index[c] + " AND gordura IS "
+                    + gordura[c] + " THEN qot IS " + qot[c] + ";");
         }
+        
+        System.out.println("\n");
     }
 
     /**
