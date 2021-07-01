@@ -1,0 +1,84 @@
+/*
+	Example: A qot calculation FIS (fuzzy inference system)
+	Calculates qot based on 'servie' and 'food'
+
+	If you want to about this example (and fuzzy logic), please 
+	read Matlab's tutorial on fuzzy logic toolbox 
+	http://www.mathworks.com/access/helpdesk/help/pdf_doc/fuzzy/fuzzy.pdf
+
+									Pablo Cingolani 
+									pcingola@users.sourceforge.net
+*/
+
+FUNCTION_BLOCK tipper	// Block definition (there may be more than one block per file)
+
+VAR_INPUT				// Define input variables
+	index : REAL;
+	gordura : REAL;
+END_VAR
+
+VAR_OUTPUT				// Define output variable
+	qot : REAL;
+END_VAR
+
+
+FUZZIFY index			// Fuzzify input variable 'service': {'poor', 'good' , 'excellent'}
+    TERM i1 := gauss 0 64;
+    TERM i2 := gauss 80 64;
+    TERM i3 := gauss 160 64;
+    TERM i4 := gauss 240 64;
+    TERM i5 := gauss 320 64;
+END_FUZZIFY
+
+
+FUZZIFY gordura			// maxvalue is ~100
+	TERM p1 := gauss 0 1.8;
+	TERM p2 := gauss 2.25 1.8;
+	TERM p3 := gauss 4.5 1.8;
+	TERM p4 := gauss 6.75 1.8;
+	TERM p5 := gauss 9 1.8;
+END_FUZZIFY
+
+
+DEFUZZIFY qot			// Defuzzify output variable 'qot' : {'cheap', 'average', 'generous' }
+	TERM excelente := (0,1) (40,0);
+	TERM razoavel := (20,0) (50,1) (80,0);
+	TERM pessimo := (60,0) (100,1);
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+RULEBLOCK No1
+	AND : MIN;			// Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgan's Law)
+	ACT : MIN;			// Use 'min' activation method
+	ACCU : MAX;			// Use 'max' accumulation method
+
+	RULE 1 : IF index IS i1 AND gordura IS p1 THEN qot IS razoavel;
+	RULE 2 : IF index IS i2 AND gordura IS p1 THEN qot IS pessimo;
+	RULE 3 : IF index IS i3 AND gordura IS p1 THEN qot IS pessimo;
+	RULE 4 : IF index IS i4 AND gordura IS p1 THEN qot IS pessimo;
+	RULE 5 : IF index IS i5 AND gordura IS p1 THEN qot IS razoavel;
+	RULE 6 : IF index IS i1 AND gordura IS p2 THEN qot IS excelente;
+	RULE 7 : IF index IS i2 AND gordura IS p2 THEN qot IS excelente;
+	RULE 8 : IF index IS i3 AND gordura IS p2 THEN qot IS razoavel;
+	RULE 9 : IF index IS i4 AND gordura IS p2 THEN qot IS razoavel;
+	RULE 10 : IF index IS i5 AND gordura IS p2 THEN qot IS pessimo;
+	RULE 11 : IF index IS i1 AND gordura IS p3 THEN qot IS excelente;
+	RULE 12 : IF index IS i2 AND gordura IS p3 THEN qot IS excelente;
+	RULE 13 : IF index IS i3 AND gordura IS p3 THEN qot IS pessimo;
+	RULE 14 : IF index IS i4 AND gordura IS p3 THEN qot IS pessimo;
+	RULE 15 : IF index IS i5 AND gordura IS p3 THEN qot IS razoavel;
+	RULE 16 : IF index IS i1 AND gordura IS p4 THEN qot IS razoavel;
+	RULE 17 : IF index IS i2 AND gordura IS p4 THEN qot IS pessimo;
+	RULE 18 : IF index IS i3 AND gordura IS p4 THEN qot IS pessimo;
+	RULE 19 : IF index IS i4 AND gordura IS p4 THEN qot IS pessimo;
+	RULE 20 : IF index IS i5 AND gordura IS p4 THEN qot IS razoavel;
+	RULE 21 : IF index IS i1 AND gordura IS p5 THEN qot IS razoavel;
+	RULE 22 : IF index IS i2 AND gordura IS p5 THEN qot IS razoavel;
+	RULE 23 : IF index IS i3 AND gordura IS p5 THEN qot IS razoavel;
+	RULE 24 : IF index IS i4 AND gordura IS p5 THEN qot IS pessimo;
+	RULE 25 : IF index IS i5 AND gordura IS p5 THEN qot IS excelente;
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
+
