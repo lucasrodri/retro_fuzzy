@@ -5,18 +5,6 @@
  */
 package encontrafcl;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 /**
  *
  * @author lucas
@@ -33,7 +21,7 @@ public class EncontraFCL {
         String ra = "Fuzzy";
         String xml = "xml/Fuzzy/USA.xml";
         int seed = 1;
-        int calls = 1000;
+        int calls = 10000;
         int load = 500;
         String diretory = "FuzzyResults";
 
@@ -47,15 +35,12 @@ public class EncontraFCL {
         String best = "min";
         
         //Quantidade de vezes que queremos refuzificar
-        int vezes = 5;
+        int vezes = 2;
         
         RetroFuzzy retro = new RetroFuzzy(ra, xml, seed, calls, load, diretory, metric, FCL_file, best);
         for (int i = 0; i < vezes; i++) {
-            System.out.println("\nRetroalimentacao No:" + i+1 + "\n");
+            System.out.println("\nRetroalimentacao No:" + (i+1) + "\n");
             retro.start();
         }
     }
-
-
-    
 }
