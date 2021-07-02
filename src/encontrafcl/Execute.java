@@ -53,10 +53,6 @@ public class Execute implements Runnable {
                 process = r.exec("rm -rf " + dir);
                 process = r.exec("mkdir -p " + dir + "/" + raClass + "_seeds");
             }
-            
-            
-            
-            
         } catch (IOException ex) {
             Logger.getLogger(Execute.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,6 +69,13 @@ public class Execute implements Runnable {
             
             String command = "java -jar ons.jar -f " + this.xml + " -s " + seed + " -ra " + raClass + " -c " + calls + " -l " + load + " -json";
             process = r.exec(command);
+            
+            try {
+                //Espera bizarra pois reclamava que o arquivo nao existia.
+                Thread.sleep(300);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Execute.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
             file = new File(dir + "/" + raClass + "_seeds" + "/" + raClass + "_seed_" + seed + "_" + load + ".json");
             FileWriter fw = new FileWriter(file);
