@@ -27,6 +27,8 @@ public class RetroFuzzy {
 
     static int times;
     
+    static int linhaArquivo = 58; //linha que comeca as regras no arquivo fcl
+    
     // estruturas de dados para manter as regras
     static String[] index, gordura, qot;
 
@@ -75,10 +77,18 @@ public class RetroFuzzy {
         // e retorna o termo de menor bloqueio para qot[i].
         for (int i = 0; i < index.length; i++) {
             qot[i] = getBestQoTResult(i, index, gordura, qot, best);
+            //Gravar no final pra garantir a ultima atualizacao do valor
+            writeRules(index, gordura, qot);
         }
-        //Gravar no final pra garantir a ultima atualizacao do valor
-        writeRules(index, gordura, qot);
         printRules(index, gordura, qot);
+        /*
+        try {
+            //Espera bizarra pois reclamava que o arquivo nao existia.
+            Thread.sleep(0);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Execute.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        */
     }
 
     /**
@@ -102,23 +112,29 @@ public class RetroFuzzy {
         }
         
         //Tem que fazer esse laço tres vezez para cada regra
-        for (int vezes = 0; vezes < 3; vezes++) {
+        for (int vezes = 0; vezes < 5; vezes++) {
             
             switch(vezes) {
                 case 0:
                     qot[i] = "pessimo";
                     break;
                 case 1:
-                    qot[i] = "razoavel";
+                    qot[i] = "ruim";
                     break;
                 case 2:
+                    qot[i] = "razoavel";
+                    break;
+                case 3:
+                    qot[i] = "bom";
+                    break;
+                case 4:
                     qot[i] = "excelente";
                     break;
             }
             
             //Escreve as regras atual
             //Parte de colocar as regras no arquivo 
-            //Tem que gravar essas regras no arquivo <FCL_file> na linha 56 em diante...
+            //Tem que gravar essas regras no arquivo <FCL_file> na linha linhaArquivo em diante...
             writeRules(index, gordura, qot);
 
             //Executa o simulador
@@ -315,10 +331,10 @@ public class RetroFuzzy {
         List<String> fclFile;
         try {
             fclFile = Files.readAllLines(Paths.get(FCL_file));
-            //pegando informação da linha 56
+            //pegando informação da linha linhaArquivo
             for (int i = 0; i < string.length; i++) {
-                int index= fclFile.get(55+i).lastIndexOf(" ");
-                string[i] = fclFile.get(55+i).substring(index+1).replaceAll(";", "");
+                int index= fclFile.get((linhaArquivo-1)+i).lastIndexOf(" ");
+                string[i] = fclFile.get((linhaArquivo-1)+i).substring(index+1).replaceAll(";", "");
             }
         } catch (IOException ex) {
             Logger.getLogger(RetroFuzzy.class.getName()).log(Level.SEVERE, null, ex);
@@ -339,12 +355,12 @@ public class RetroFuzzy {
         List<String> fclFile;
         try {
             fclFile = Files.readAllLines(Paths.get(FCL_file));
-            //pegando informação da linha 56
-            //String linha56 = fclFile.get(55);
+            //pegando informação da linha linhaArquivo
+            //String linhaArquivo = fclFile.get((linhaArquivo-1));
             
             String[] string = printRulesString(index, gordura, qot);
             for (int i = 0; i < string.length; i++) {
-                fclFile.set(i+55, string[i]);
+                fclFile.set(i+(linhaArquivo-1), string[i]);
             }
             
             //deletando o conteúdo do arquivo

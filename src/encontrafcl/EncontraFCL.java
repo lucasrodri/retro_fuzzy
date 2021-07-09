@@ -35,7 +35,7 @@ public class EncontraFCL {
         String best = "min";
         
         //Quantidade de vezes que queremos refuzificar
-        int vezes = 10;
+        int vezes = 3;
         
         RetroFuzzy retro = new RetroFuzzy(ra, xml, seed, calls, load, diretory, metric, FCL_file, best);
         for (int i = 0; i < vezes; i++) {

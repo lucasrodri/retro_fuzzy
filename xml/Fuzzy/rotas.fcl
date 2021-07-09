@@ -41,9 +41,11 @@ END_FUZZIFY
 
 
 DEFUZZIFY qot			// Defuzzify output variable 'qot' : {'cheap', 'average', 'generous' }
-	TERM excelente := (0,1) (40,0);
-	TERM razoavel := (20,0) (50,1) (80,0);
-	TERM pessimo := (60,0) (100,1);
+	TERM excelente := gauss 0 15;
+        TERM bom := gauss 25 15;
+	TERM razoavel := gauss 50 15;
+        TERM ruim := gauss 75 15;
+	TERM pessimo := gauss 100 15;
 	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
 	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
 END_DEFUZZIFY
@@ -53,31 +55,31 @@ RULEBLOCK No1
 	ACT : MIN;			// Use 'min' activation method
 	ACCU : MAX;			// Use 'max' accumulation method
 
-	RULE 1 : IF index IS i1 AND gordura IS p1 THEN qot IS pessimo;
-	RULE 2 : IF index IS i2 AND gordura IS p1 THEN qot IS pessimo;
-	RULE 3 : IF index IS i3 AND gordura IS p1 THEN qot IS pessimo;
+	RULE 1 : IF index IS i1 AND gordura IS p1 THEN qot IS razoavel;
+	RULE 2 : IF index IS i2 AND gordura IS p1 THEN qot IS ruim;
+	RULE 3 : IF index IS i3 AND gordura IS p1 THEN qot IS razoavel;
 	RULE 4 : IF index IS i4 AND gordura IS p1 THEN qot IS pessimo;
-	RULE 5 : IF index IS i5 AND gordura IS p1 THEN qot IS razoavel;
+	RULE 5 : IF index IS i5 AND gordura IS p1 THEN qot IS pessimo;
 	RULE 6 : IF index IS i1 AND gordura IS p2 THEN qot IS excelente;
-	RULE 7 : IF index IS i2 AND gordura IS p2 THEN qot IS excelente;
-	RULE 8 : IF index IS i3 AND gordura IS p2 THEN qot IS razoavel;
-	RULE 9 : IF index IS i4 AND gordura IS p2 THEN qot IS razoavel;
+	RULE 7 : IF index IS i2 AND gordura IS p2 THEN qot IS razoavel;
+	RULE 8 : IF index IS i3 AND gordura IS p2 THEN qot IS excelente;
+	RULE 9 : IF index IS i4 AND gordura IS p2 THEN qot IS excelente;
 	RULE 10 : IF index IS i5 AND gordura IS p2 THEN qot IS pessimo;
 	RULE 11 : IF index IS i1 AND gordura IS p3 THEN qot IS excelente;
-	RULE 12 : IF index IS i2 AND gordura IS p3 THEN qot IS razoavel;
-	RULE 13 : IF index IS i3 AND gordura IS p3 THEN qot IS pessimo;
+	RULE 12 : IF index IS i2 AND gordura IS p3 THEN qot IS excelente;
+	RULE 13 : IF index IS i3 AND gordura IS p3 THEN qot IS excelente;
 	RULE 14 : IF index IS i4 AND gordura IS p3 THEN qot IS pessimo;
 	RULE 15 : IF index IS i5 AND gordura IS p3 THEN qot IS pessimo;
 	RULE 16 : IF index IS i1 AND gordura IS p4 THEN qot IS razoavel;
-	RULE 17 : IF index IS i2 AND gordura IS p4 THEN qot IS pessimo;
-	RULE 18 : IF index IS i3 AND gordura IS p4 THEN qot IS razoavel;
-	RULE 19 : IF index IS i4 AND gordura IS p4 THEN qot IS pessimo;
-	RULE 20 : IF index IS i5 AND gordura IS p4 THEN qot IS razoavel;
-	RULE 21 : IF index IS i1 AND gordura IS p5 THEN qot IS razoavel;
-	RULE 22 : IF index IS i2 AND gordura IS p5 THEN qot IS razoavel;
+	RULE 17 : IF index IS i2 AND gordura IS p4 THEN qot IS excelente;
+	RULE 18 : IF index IS i3 AND gordura IS p4 THEN qot IS pessimo;
+	RULE 19 : IF index IS i4 AND gordura IS p4 THEN qot IS razoavel;
+	RULE 20 : IF index IS i5 AND gordura IS p4 THEN qot IS pessimo;
+	RULE 21 : IF index IS i1 AND gordura IS p5 THEN qot IS excelente;
+	RULE 22 : IF index IS i2 AND gordura IS p5 THEN qot IS pessimo;
 	RULE 23 : IF index IS i3 AND gordura IS p5 THEN qot IS razoavel;
 	RULE 24 : IF index IS i4 AND gordura IS p5 THEN qot IS razoavel;
-	RULE 25 : IF index IS i5 AND gordura IS p5 THEN qot IS razoavel;
+	RULE 25 : IF index IS i5 AND gordura IS p5 THEN qot IS excelente;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK
